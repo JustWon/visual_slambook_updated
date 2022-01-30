@@ -1,5 +1,6 @@
 #include <pangolin/pangolin.h>
 #include <Eigen/Core>
+#include <Eigen/Geometry>
 #include <unistd.h>
 
 // 本例演示了如何画出一个预先存储的轨迹

@@ -79,7 +79,7 @@ void Viewer::ThreadLoop() {
 
 cv::Mat Viewer::PlotFrameImage() {
     cv::Mat img_out;
-    cv::cvtColor(current_frame_->left_img_, img_out, CV_GRAY2BGR);
+    cv::cvtColor(current_frame_->left_img_, img_out, cv::COLOR_GRAY2BGR);
     for (size_t i = 0; i < current_frame_->features_left_.size(); ++i) {
         if (current_frame_->features_left_[i]->map_point_.lock()) {
             auto feat = current_frame_->features_left_[i];
@@ -92,7 +92,13 @@ cv::Mat Viewer::PlotFrameImage() {
 
 void Viewer::FollowCurrentFrame(pangolin::OpenGlRenderState& vis_camera) {
     SE3 Twc = current_frame_->Pose().inverse();
-    pangolin::OpenGlMatrix m(Twc.matrix());
+    pangolin::OpenGlMatrix m;//(Twc.matrix());
+    auto temp = Twc.matrix3x4();
+
+    for(int i = 0; i<3; i++)
+    for(int j = 0; j<4; j++)
+        m(i,j) = temp(i,j);
+    
     vis_camera.Follow(m, true);
 }
 
