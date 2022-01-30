@@ -1,3 +1,7 @@
+## Updated version of slambook2 code
+
+---
+
 ## Slambook2
 ![titlepage](./figures/title.png)
 
